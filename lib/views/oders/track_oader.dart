@@ -27,7 +27,9 @@ class TrackOaderView extends StatelessWidget {
         title: const Text(
           "Track Order",
           style: TextStyle(
-              color: AppColors.ktextColor, fontWeight: FontWeight.w600, fontSize: 15),
+              color: AppColors.ktextColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 15),
         ),
         backgroundColor: Colors.white,
       ),
@@ -95,13 +97,14 @@ class TrackOaderView extends StatelessWidget {
                 ),
               ),
               kbox30(),
-              GestureDetector(onTap: () {
-                 Navigator.push(
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => CheckOutMainView(),
                       ));
-              },
+                },
                 child: Container(
                   height: 60.h,
                   width: 350,

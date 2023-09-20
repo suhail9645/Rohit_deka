@@ -8,7 +8,7 @@ import 'package:rohit_multivender/views/chicken/chicken_product.dart';
 import 'package:rohit_multivender/views/vegetabels_fruits/vegitable_category.dart';
 
 class ReliencePageView extends StatelessWidget {
-   ReliencePageView({super.key});
+  ReliencePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class ReliencePageView extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to( ReliencePageView());
+                      Get.to(ReliencePageView());
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class ReliencePageView extends StatelessWidget {
                         fontWeight: FontWeight.w300),
                   ),
                   kbox10(),
-                   Row(
+                  Row(
                     children: [
                       const Icon(
                         Icons.calendar_month,
@@ -148,14 +148,14 @@ class ReliencePageView extends StatelessWidget {
                   ),
                   kbox20(),
                   const Text(
-                        "New in Our Store ",
-                        style: TextStyle(
-                            color: AppColors.ktextColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      kbox10(),
-                      Container(
+                    "New in Our Store ",
+                    style: TextStyle(
+                        color: AppColors.ktextColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  kbox10(),
+                  Container(
                     height: 90.h,
                     child: ListView.separated(
                       itemCount: shopbycategory.length,
@@ -163,9 +163,10 @@ class ReliencePageView extends StatelessWidget {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return InkWell(onTap: () {
-                          Get.to(ChickenProductView());
-                        },
+                        return InkWell(
+                          onTap: () {
+                            Get.to(ChickenProductView());
+                          },
                           child: Column(
                             children: [
                               Image.asset(shopbycategory[index]),
@@ -184,8 +185,8 @@ class ReliencePageView extends StatelessWidget {
                       },
                     ),
                   ),
-                   kbox10(),
-                      Container(
+                  kbox10(),
+                  Container(
                     height: 90.h,
                     child: ListView.separated(
                       itemCount: shopbycategory.length,
@@ -212,14 +213,14 @@ class ReliencePageView extends StatelessWidget {
                   ),
                   kbox20(),
                   const Text(
-                        "Lowest Prices ",
-                        style: TextStyle(
-                            color: AppColors.ktextColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      kbox10(),
-                      Container(
+                    "Lowest Prices ",
+                    style: TextStyle(
+                        color: AppColors.ktextColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  kbox10(),
+                  Container(
                     height: 90.h,
                     child: ListView.separated(
                       itemCount: shopbycategory.length,
@@ -252,6 +253,7 @@ class ReliencePageView extends StatelessWidget {
       ),
     );
   }
+
   List shopbycategory = [
     "assets/chiken1.png",
     "assets/fish.png",
@@ -280,5 +282,4 @@ class ReliencePageView extends StatelessWidget {
     "Sweet tooth",
     "Instant &\nfrozen food",
   ];
-
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rohit_multivender/utills/app_colors.dart';
@@ -5,6 +7,8 @@ import 'package:rohit_multivender/utills/constant_box.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:rohit_multivender/utills/constant_button.dart';
 import 'package:rohit_multivender/views/verify_view.dart';
+
+import '../../controller/controllers/auth_controller.dart';
 
 class OTPVerificationView extends StatefulWidget {
   const OTPVerificationView({super.key});
@@ -14,8 +18,12 @@ class OTPVerificationView extends StatefulWidget {
 }
 
 class _OTPVerificationViewState extends State<OTPVerificationView> {
+  String _otp = '';
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
+    print(authController.authModel?.user?.otp);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -23,9 +31,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               kbox50(),
-                kbox30(),
-              Container(height: 150,
-                    child: Image.asset("assets/logo+glow.png")),
+              kbox30(),
+              Container(
+                  height: 150, child: Image.asset("assets/logo+glow.png")),
               kbox20(),
               const Text(
                 "Enter verification code",
@@ -52,6 +60,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
               kbox40(),
               Center(
                 child: VerificationCode(
+                  pasteStream: authController.pasteCode,
                   fullBorder: true,
                   margin: const EdgeInsets.all(8),
                   fillColor: Colors.transparent,
@@ -59,7 +68,8 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                   itemSize: 50,
                   underlineWidth: 1,
                   underlineUnfocusedColor: AppColors.ktextColor,
-                  textStyle: const TextStyle(fontSize: 20.0, color: AppColors.ktextColor),
+                  textStyle: const TextStyle(
+                      fontSize: 20.0, color: AppColors.ktextColor),
                   keyboardType: TextInputType.number,
                   underlineColor: Colors
                       .black, // If this is null it will use primaryColor: kmainColor from Theme
@@ -68,26 +78,26 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                       .black, // If this is null it will default to the ambient
                   // clearAll is NOTrequired, you can delete it
                   // takes any widget, so you can implement your design
-      
+
                   onCompleted: (String value) {
                     setState(() {
-                      // _code = value;
-                      //otp = value;
+                      _otp = value;
                     });
                   },
                   onEditing: (bool value) {
-                    setState(() {
-                      //_onEditing = value;
-                    });
+                    setState(() {});
                     // if (!_onEditing) FocusScope.of(context).unfocus();
                   },
                 ),
               ),
               kbox60(),
-                kbox50(),
-              kbutton("Continue", (){
-                Get.to(VerifyView());
-              })
+              kbox50(),
+              Obx(() => !authController.isLoading.value
+                  ? kbutton("Continue", () {
+                      authController.onValidateOtp(_otp);
+                      //
+                    })
+                  : const CircularProgressIndicator())
             ],
           ),
         ),

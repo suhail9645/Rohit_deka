@@ -13,8 +13,8 @@ class CheckOutMainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size =MediaQuery.of(context).size.height;
-     var wsize =MediaQuery.of(context).size.width;
+    var size = MediaQuery.of(context).size.height;
+    var wsize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xffEAEAEA),
       appBar: AppBar(
@@ -116,7 +116,7 @@ class CheckOutMainView extends StatelessWidget {
                                         color: AppColors.ktextColor,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                   SizedBox(width: wsize*0.1),
+                                  SizedBox(width: wsize * 0.1),
                                   Container(
                                     height: 25.h,
                                     width: 80.w,
@@ -155,7 +155,7 @@ class CheckOutMainView extends StatelessWidget {
                                         color: Colors.green,
                                         fontWeight: FontWeight.w900),
                                   ),
-                                   Text(
+                                  Text(
                                     "and opt for a paperbag instead”",
                                     style: TextStyle(
                                         fontSize: 12,
@@ -200,7 +200,7 @@ class CheckOutMainView extends StatelessWidget {
                         ),
                         kbox20(),
                         Container(
-                          height: size*0.3,
+                          height: size * 0.3,
                           child: ListView.separated(
                             separatorBuilder: (context, index) => kboxw10(),
                             shrinkWrap: true,
@@ -225,7 +225,6 @@ class CheckOutMainView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset("assets/promo.png"),
-                     
                       const Text(
                         "Use Promo Code",
                         style: TextStyle(

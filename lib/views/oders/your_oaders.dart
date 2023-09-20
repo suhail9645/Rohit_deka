@@ -12,7 +12,8 @@ class YourOadersView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar( leading: InkWell(
+      appBar: AppBar(
+        leading: InkWell(
             onTap: () {
               Get.back();
             },
@@ -48,16 +49,20 @@ class YourOadersView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset("assets/root.png"),
                                 Text(
                                   "track ",
-                                  style: TextStyle(color: Color(0xff018201),fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: Color(0xff018201),
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
-                            const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "XYZ Delievery",
@@ -65,7 +70,9 @@ class YourOadersView extends StatelessWidget {
                                 ),
                                 Text(
                                   "Shipped ",
-                                  style: TextStyle(color: AppColors.ktextColor,fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   "House Number,Delhi",
@@ -82,24 +89,27 @@ class YourOadersView extends StatelessWidget {
                 },
               ),
               kbox30(),
-              InkWell(onTap: () {
-                Get.to(BottomNavigationBarView(select: 0,));
-              },
+              InkWell(
+                onTap: () {
+                  Get.to(BottomNavigationBarView(
+                    select: 0,
+                  ));
+                },
                 child: Container(
-                    height: 60.h,
-                    width: 350,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: AppColors.buttoncolor),
-                    child: const Center(
-                        child: Text(
-                      "Continue Shopping",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    )),
-                  ),
+                  height: 60.h,
+                  width: 350,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.buttoncolor),
+                  child: const Center(
+                      child: Text(
+                    "Continue Shopping",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700),
+                  )),
+                ),
               ),
             ],
           ),

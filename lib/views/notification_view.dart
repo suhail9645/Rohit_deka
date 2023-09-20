@@ -13,9 +13,10 @@ class NotificationView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(onTap: () {
-          Get.back();
-        },
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
           child: const Icon(
             Icons.arrow_back,
             color: AppColors.ktextColor,

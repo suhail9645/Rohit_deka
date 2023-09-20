@@ -1,12 +1,12 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rohit_multivender/utills/app_colors.dart';
 
 kbutton(text, ontap) {
-  return InkWell(onTap: (){
-    ontap;
-  },
+  return InkWell(
+    onTap: () {
+      ontap;
+    },
     child: Container(
       height: 50,
       width: 300,

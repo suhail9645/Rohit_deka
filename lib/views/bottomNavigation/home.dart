@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:rohit_multivender/controller/controllers/home_controller.dart';
 import 'package:rohit_multivender/utills/app_colors.dart';
 import 'package:rohit_multivender/utills/constant_box.dart';
 import 'package:rohit_multivender/views/chicken/chicken_product.dart';
@@ -38,11 +39,12 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(left: 5,right: 5,top: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,8 +186,8 @@ class _HomeViewState extends State<HomeView> {
                             Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
@@ -218,48 +220,55 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: shopbycategory.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(shopbycategory[index]),
-                                backgroundColor: Colors.transparent,
+                Obx(() {
+                  if(!homeController.newProductsIsLoading.value){
+                  return Container(
+                    height: 120.h,
+                    child: ListView.separated(
+                      itemCount: shopbycategory.length,
+                      separatorBuilder: (context, index) => kboxw10(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Get.to(const ChickenProductView());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 2, color: Color(0xff97CADB)),
+                                    shape: BoxShape.circle),
+                                child: CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundImage:
+                                      AssetImage(shopbycategory[index]),
+                                  backgroundColor: Colors.transparent,
+                                ),
                               ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                              kbox10(),
+                              Text(
+                                shopbycategorytext[index],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: AppColors.ktextColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+
+                  }else{
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                }),
                 kbox20(),
                 const Text(
                   "Lowest Prices",
@@ -286,8 +295,8 @@ class _HomeViewState extends State<HomeView> {
                             Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
@@ -337,13 +346,12 @@ class _HomeViewState extends State<HomeView> {
                             Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(brand[index]),
+                                backgroundImage: AssetImage(brand[index]),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
@@ -388,13 +396,12 @@ class _HomeViewState extends State<HomeView> {
                             Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(brand[index]),
+                                backgroundImage: AssetImage(brand[index]),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
@@ -436,16 +443,15 @@ class _HomeViewState extends State<HomeView> {
                         },
                         child: Column(
                           children: [
-                           Container(
+                            Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(brand[index]),
+                                backgroundImage: AssetImage(brand[index]),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
@@ -487,16 +493,15 @@ class _HomeViewState extends State<HomeView> {
                         },
                         child: Column(
                           children: [
-                          Container(
+                            Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(brand[index]),
+                                backgroundImage: AssetImage(brand[index]),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
@@ -546,16 +551,15 @@ class _HomeViewState extends State<HomeView> {
                         },
                         child: Column(
                           children: [
-                           Container(
+                            Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 2,
-                                    color: Color(0xff97CADB)),
+                                  border: Border.all(
+                                      width: 2, color: Color(0xff97CADB)),
                                   shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(brand[index]),
+                                backgroundImage: AssetImage(brand[index]),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),

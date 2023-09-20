@@ -10,20 +10,21 @@ import 'package:rohit_multivender/utills/constant_box.dart';
 import 'package:rohit_multivender/views/bottomNavigation/bottom_bar_view.dart';
 
 class MyPrintingView extends StatelessWidget {
-   MyPrintingView({super.key});
+  MyPrintingView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 5,right: 5,top: 5),
+        padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(onTap: () {
-                imagePick();
-              },
+              InkWell(
+                onTap: () {
+                  imagePick();
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     color: const Color(0xffCAF0FF),
@@ -119,15 +120,14 @@ class MyPrintingView extends StatelessWidget {
               kbox40(),
               InkWell(
                 onTap: () {
-                
-                  Timer(Duration(seconds: 3), () { 
-                   Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BottomNavigationBarView(
-                                  select: 0,
-                                )),
-                      ); 
+                  Timer(Duration(seconds: 3), () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BottomNavigationBarView(
+                                select: 0,
+                              )),
+                    );
                   });
                   showDialog(
                     context: context,
@@ -162,7 +162,6 @@ class MyPrintingView extends StatelessWidget {
                       );
                     },
                   );
-                  
                 },
                 child: Container(
                   height: 60.h,
@@ -241,6 +240,7 @@ class MyPrintingView extends StatelessWidget {
       )),
     );
   }
+
   final ImagePicker picker = ImagePicker();
   final networkImage = ''.obs;
   XFile? image;
@@ -257,7 +257,6 @@ class MyPrintingView extends StatelessWidget {
       isPick.value = true;
       img = File(image!.path);
       imagePath.value = image!.path;
-     
     }
   }
 }

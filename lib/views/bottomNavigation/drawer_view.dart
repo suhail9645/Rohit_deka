@@ -19,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: Container(
         decoration: const BoxDecoration(
-        // borderRadius: BorderRadius.only(20),
+          // borderRadius: BorderRadius.only(20),
           gradient: LinearGradient(
             colors: [
               Color(0xFFC2EBFB),
@@ -86,7 +86,7 @@ class CustomDrawer extends StatelessWidget {
                 children: [
                   Container(
                     height: 70.h,
-                    width: MediaQuery.of(context).size.width*0.65,
+                    width: MediaQuery.of(context).size.width * 0.65,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: const Color(0xff02457A)),
@@ -256,15 +256,15 @@ class CustomDrawer extends StatelessWidget {
           Container(
               //width: 200.w,
               child: Row(
-                children: [
-                  Image.asset("assets/$icon.png"),
-                  kboxw20(),
-                  Text(
-                    text,
-                    style: const TextStyle(color: AppColors.ktextColor),
-                  )
-                ],
-              )),
+            children: [
+              Image.asset("assets/$icon.png"),
+              kboxw20(),
+              Text(
+                text,
+                style: const TextStyle(color: AppColors.ktextColor),
+              )
+            ],
+          )),
           const Icon(
             Icons.arrow_forward_ios,
             color: AppColors.ktextColor,

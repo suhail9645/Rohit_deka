@@ -29,7 +29,8 @@ class _CategoryViewState extends State<CategoryView> {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
 
-    return Scaffold(floatingActionButton: viewCart
+    return Scaffold(
+      floatingActionButton: viewCart
           ? Padding(
               padding: const EdgeInsets.only(left: 30),
               child: InkWell(
@@ -81,10 +82,9 @@ class _CategoryViewState extends State<CategoryView> {
                         Get.back();
                       },
                       icon: const Icon(Icons.arrow_back)),
-                   CircleAvatar(
+                  CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage(
-                        "assets/relience.png"),
+                    backgroundImage: AssetImage("assets/relience.png"),
                   ),
                   InkWell(
                     onTap: () {
@@ -390,7 +390,7 @@ class _CategoryViewState extends State<CategoryView> {
                     vertical: 3,
                   ),
                   decoration: BoxDecoration(
-                  color: AppColors.buttoncolor,
+                    color: AppColors.buttoncolor,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: const Text(
@@ -465,11 +465,12 @@ class _CategoryViewState extends State<CategoryView> {
                 const SizedBox(
                   width: 2,
                 ),
-                InkWell(onTap: () {
-                  setState(() {
-                    viewCart = true;
-                  });
-                },
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      viewCart = true;
+                    });
+                  },
                   child: Container(
                     height: 20,
                     width: 20,
@@ -583,7 +584,7 @@ class _CategoryViewState extends State<CategoryView> {
                   width: 20,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                     color: AppColors.buttoncolor,
+                    color: AppColors.buttoncolor,
                   ),
                   child: const Icon(
                     Icons.add,

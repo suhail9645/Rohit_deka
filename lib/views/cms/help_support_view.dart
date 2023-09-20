@@ -5,14 +5,19 @@ import 'package:rohit_multivender/utills/app_colors.dart';
 
 class HelpAndSuportView extends StatelessWidget {
   const HelpAndSuportView({super.key});
- @override
+  @override
   Widget build(BuildContext context) {
     final sentence = Lorem.sentence(numSentences: 30);
     return Scaffold(
-      appBar: AppBar(leading: InkWell(onTap: () {
-        Get.back();
-      },
-        child: Icon(Icons.arrow_back,color: AppColors.ktextColor,)),
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: AppColors.ktextColor,
+            )),
         backgroundColor: Colors.white,
         title: const Text(
           "Help & Support",
@@ -28,7 +33,9 @@ class HelpAndSuportView extends StatelessWidget {
           Text(
             sentence,
             style: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w400, color: AppColors.ktextColor),
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: AppColors.ktextColor),
           ),
         ]),
       ))),

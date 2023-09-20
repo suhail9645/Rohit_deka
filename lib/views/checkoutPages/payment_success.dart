@@ -16,13 +16,16 @@ class SuccessPayment extends StatefulWidget {
 class _SuccessPaymentState extends State<SuccessPayment> {
   @override
   void initState() {
-   Timer(Duration(seconds: 2), () {
-     mainpayment = false;
-     showRating = true;
-     Get.offAll(BottomNavigationBarView(select: 0,));
+    Timer(Duration(seconds: 2), () {
+      mainpayment = false;
+      showRating = true;
+      Get.offAll(BottomNavigationBarView(
+        select: 0,
+      ));
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +35,7 @@ class _SuccessPaymentState extends State<SuccessPayment> {
           children: [
             InkWell(
                 onTap: () {
-                 // Get.to(BottomNavigationBarView(select: 0,));
+                  // Get.to(BottomNavigationBarView(select: 0,));
                 },
                 child: Image.asset("assets/verify.png")),
             kbox10(),

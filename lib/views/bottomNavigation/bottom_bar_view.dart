@@ -86,13 +86,20 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
               elevation: 0,
               leading: Builder(
                 builder: (context) => MaterialButton(
-                  child: Icon(Icons.menu,color: AppColors.ktextColor,),
+                  child: Icon(
+                    Icons.menu,
+                    color: AppColors.ktextColor,
+                  ),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               ),
               title: const Row(
                 children: [
-                 Icon(Icons.location_on,color: AppColors.ktextColor,size: 30,),
+                  Icon(
+                    Icons.location_on,
+                    color: AppColors.ktextColor,
+                    size: 30,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

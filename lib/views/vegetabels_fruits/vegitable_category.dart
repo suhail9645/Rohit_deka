@@ -10,7 +10,8 @@ class VegitableDescriptionView extends StatefulWidget {
   const VegitableDescriptionView({super.key});
 
   @override
-  State<VegitableDescriptionView> createState() => _VegitableDescriptionViewState();
+  State<VegitableDescriptionView> createState() =>
+      _VegitableDescriptionViewState();
 }
 
 class _VegitableDescriptionViewState extends State<VegitableDescriptionView> {
@@ -519,7 +520,13 @@ class _VegitableDescriptionViewState extends State<VegitableDescriptionView> {
       ),
     );
   }
-  List images = ["assets/gobi.png","assets/chili.png","assets/gobi.png","assets/chili.png"];
+
+  List images = [
+    "assets/gobi.png",
+    "assets/chili.png",
+    "assets/gobi.png",
+    "assets/chili.png"
+  ];
 }
 
 class Button extends StatelessWidget {
@@ -596,5 +603,4 @@ class ListItems extends StatelessWidget {
       ),
     );
   }
-  
 }

@@ -1,0 +1,10 @@
+const String baseUrl = 'https://rohit-deka-grosco.vercel.app/';
+const String otpGenerateUrl = 'api/v1/login';
+const String otpVarificationUrl = 'api/v1/verify/login';
+const String newProductsUrl='api/v1/product/date';
+const String lowPriceProductsUrl='api/v1/low/price';
+const String brandProductsUrl='api/v1/brand';
+const String bakingEasyProductsUrl='api/v1/easy/baking';
+const String weekendProductsUrl='api/v1/weekend/special';
+const String quickProductsUrl='api/v1/easy/meal';
+const String assamProductsUrl='api/v1/assam/special';

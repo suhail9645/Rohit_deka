@@ -6,7 +6,6 @@ import 'package:rohit_multivender/views/splash_view.dart';
 import 'package:rohit_multivender/views/subscription_view.dart';
 import 'package:rohit_multivender/views/vegetabels_fruits/vegitable_category.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context , child) {
+      builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'First Method',

@@ -296,9 +296,10 @@ class PaymentOptionView extends StatelessWidget {
             ),
             kbox30(),
             Center(
-              child: InkWell(onTap: () {
-                Get.to(SuccessPayment());
-              },
+              child: InkWell(
+                onTap: () {
+                  Get.to(SuccessPayment());
+                },
                 child: Container(
                   height: 45.h,
                   width: Get.width - 100,

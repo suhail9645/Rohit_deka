@@ -16,7 +16,9 @@ class VerifyView extends StatelessWidget {
           children: [
             InkWell(
                 onTap: () {
-                  Get.to(BottomNavigationBarView(select: 0,));
+                  Get.to(BottomNavigationBarView(
+                    select: 0,
+                  ));
                 },
                 child: Image.asset("assets/verify.png")),
             kbox10(),

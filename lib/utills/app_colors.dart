@@ -12,20 +12,17 @@ class AppColors {
   static const light = Color(0xFF645D6A);
   static const creamColor = Color(0XFFF6F7F6);
   static const dividerColor = Color(0xFFE6E6E6);
-  static const aquaMarine  = Color(0xFF16A583);
-  static const lightaquaMarine  = Color.fromRGBO(22, 165, 131, 0.37);
-  static const darkblue  = Color(0xFF001B48);
-  static const red  = Color(0xFFF10023);
-  static const toggleon  = Color(0xFF05FF00);
-  static const online  = Color(0xFF52E41E);
+  static const aquaMarine = Color(0xFF16A583);
+  static const lightaquaMarine = Color.fromRGBO(22, 165, 131, 0.37);
+  static const darkblue = Color(0xFF001B48);
+  static const red = Color(0xFFF10023);
+  static const toggleon = Color(0xFF05FF00);
+  static const online = Color(0xFF52E41E);
 
   static const buttoncolor = Color(0xFF018ABE);
-   static const kboadercolor = Colors.grey;
-   static const maincolor = Color(0xFF0D1225);
-   static const kboxColor = Color(0xFF292D32);
+  static const kboadercolor = Colors.grey;
+  static const maincolor = Color(0xFF0D1225);
+  static const kboxColor = Color(0xFF292D32);
   static const ktextColor = Color(0xFF001B48);
-    static const ktextforColor = Color(0xFFD9D9D9);
-
-
-
+  static const ktextforColor = Color(0xFFD9D9D9);
 }

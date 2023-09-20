@@ -99,7 +99,8 @@ class RattingReviewView extends StatelessWidget {
                   style: TextStyle(color: AppColors.ktextColor, fontSize: 20),
                 ),
                 kbox30(),
-                Container(width: 300,
+                Container(
+                  width: 300,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: AppColors.buttoncolor),

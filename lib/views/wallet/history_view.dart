@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../utills/app_colors.dart';
 
 class HistoryView extends StatelessWidget {
@@ -9,13 +8,14 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(onTap: () {
-          Get.back();
-        },
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
           child: const Icon(
             Icons.arrow_back,
             color: AppColors.ktextColor,
@@ -26,41 +26,41 @@ class HistoryView extends StatelessWidget {
           "Transaction History",
           style: TextStyle(color: AppColors.ktextColor),
         ),
-        
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(children: [
-           Container(height: Get.height-200,
-                child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          index % 2 == 0
-                              ? "Added From Bank Account"
-                              : "Transfer to Micheal",
-                          style: const TextStyle(color: AppColors.ktextColor),
-                        ),
-                        subtitle: const Text(
-                          "6 Days ago",
-                          style: TextStyle(color: Colors.black45),
-                        ),
-                        trailing: Text(
-                          index % 2 == 0 ? "+₹500" : "-₹150",
-                          style: const TextStyle(
-                              color: Color(0xff2CB22C),
-                              fontWeight: FontWeight.w600),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) => const Divider(
-                          color: AppColors.ktextColor,
-                        ),
-                    itemCount: 10),
-              )
+          Container(
+            height: Get.height - 200,
+            child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                physics: const AlwaysScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      index % 2 == 0
+                          ? "Added From Bank Account"
+                          : "Transfer to Micheal",
+                      style: const TextStyle(color: AppColors.ktextColor),
+                    ),
+                    subtitle: const Text(
+                      "6 Days ago",
+                      style: TextStyle(color: Colors.black45),
+                    ),
+                    trailing: Text(
+                      index % 2 == 0 ? "+₹500" : "-₹150",
+                      style: const TextStyle(
+                          color: Color(0xff2CB22C),
+                          fontWeight: FontWeight.w600),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(
+                      color: AppColors.ktextColor,
+                    ),
+                itemCount: 10),
+          )
         ]),
       ),
     );

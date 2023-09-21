@@ -6,6 +6,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:rohit_multivender/controller/controllers/home_controller.dart';
+import 'package:rohit_multivender/model/category/category.dart';
+import 'package:rohit_multivender/model/product/product.dart';
 import 'package:rohit_multivender/utills/app_colors.dart';
 import 'package:rohit_multivender/utills/constant_box.dart';
 import 'package:rohit_multivender/views/chicken/chicken_product.dart';
@@ -165,76 +167,29 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 2 / 3.2,
-                  ),
-                  itemCount: shopbycategory.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.to(const ChickenProductView());
-                      },
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(shopbycategory[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            //  Image.asset(shopbycategory[index]),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                const Text(
-                  "New in Our Store",
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: AppColors.ktextColor,
-                      fontWeight: FontWeight.w500),
-                ),
-                kbox20(),
-                Obx(() {
-                  if(!homeController.newProductsIsLoading.value){
-                  return Container(
-                    height: 120.h,
-                    child: ListView.separated(
-                      itemCount: shopbycategory.length,
-                      separatorBuilder: (context, index) => kboxw10(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Get.to(const ChickenProductView());
-                          },
+                Obx(
+                  () {
+                    if(!homeController.categoryIsLoading.value){
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 2 / 3.2,
+                    ),
+                    itemCount: homeController.categories.length,
+                    itemBuilder: (context, index) {
+                      Category category=homeController.categories[index];
+                      String?image=category.image;
+                      String? name=category.name;
+                      return InkWell(
+                        onTap: () {
+                          Get.to(const ChickenProductView());
+                        },
+                        child: Center(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 height: 60,
@@ -245,28 +200,94 @@ class _HomeViewState extends State<HomeView> {
                                 child: CircleAvatar(
                                   radius: 30.0,
                                   backgroundImage:
-                                      AssetImage(shopbycategory[index]),
+                                      NetworkImage(image??'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
                                   backgroundColor: Colors.transparent,
                                 ),
                               ),
+                              //  Image.asset(shopbycategory[index]),
                               kbox10(),
                               Text(
-                                shopbycategorytext[index],
+                                name??'Unknown',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     color: AppColors.ktextColor,
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   );
-
-                  }else{
+                  }
+                  else{
                     return const Center(child: CircularProgressIndicator(),);
+                  }
+                  }
+                ),
+
+                const Text(
+                  "New in Our Store",
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: AppColors.ktextColor,
+                      fontWeight: FontWeight.w500),
+                ),
+                kbox20(),
+                Obx(() {
+                  if (!homeController.newProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: 10,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product = homeController.newProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
                 }),
                 kbox20(),
@@ -278,48 +299,62 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: shopbycategory.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
+                Obx(() {
+                  if (!homeController.lowPriceIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: homeController.lowPriceProducts.length,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product =
+                              homeController.lowPriceProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage:
-                                    AssetImage(shopbycategory[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
                 kbox20(),
                 const Text(
                   "Brand Spotlight",
@@ -329,47 +364,73 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: brand.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: AssetImage(brand[index]),
-                                backgroundColor: Colors.transparent,
+                Obx(() {
+                  if (!homeController.brandProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: homeController.brandProducts.isNotEmpty
+                          ? ListView.separated(
+                              itemCount: homeController.brandProducts.length,
+                              separatorBuilder: (context, index) => kboxw10(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                Product product =
+                                    homeController.brandProducts[index];
+                                String? image = product.images!.isNotEmpty
+                                    ? product.images?.first
+                                    : null;
+                                String? name = product.name;
+                                return InkWell(
+                                  onTap: () {
+                                    Get.to(const ChickenProductView());
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 2,
+                                                color: Color(0xff97CADB)),
+                                            shape: BoxShape.circle),
+                                        child: CircleAvatar(
+                                          radius: 30.0,
+                                          backgroundImage: NetworkImage(image ??
+                                              'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                      ),
+                                      kbox10(),
+                                      Text(
+                                        name ?? 'Unknown',
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            color: AppColors.ktextColor,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
+                          : const Center(
+                              child: Text(
+                                'No Items to show',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: AppColors.ktextColor,
+                                    fontWeight: FontWeight.w300),
                               ),
                             ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
                 kbox20(),
                 const Text(
                   "Baking made it easy",
@@ -379,47 +440,62 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: brand.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
+                Obx(() {
+                  if (!homeController.bakingEasyProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: homeController.bakingEasyProducts.length,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product =
+                              homeController.bakingEasyProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: AssetImage(brand[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
                 kbox20(),
                 const Text(
                   "Weekend Special",
@@ -429,47 +505,62 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: brand.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
+                Obx(() {
+                  if (!homeController.weekendProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: homeController.weekendProducts.length,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product =
+                              homeController.weekendProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: AssetImage(brand[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
                 kbox20(),
                 const Text(
                   "Quick & Easy Meal Solutions",
@@ -479,48 +570,62 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w500),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: brand.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
+                Obx(() {
+                  if (!homeController.quickProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: homeController.quickProducts.length,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product = homeController.quickProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: AssetImage(brand[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                kbox50(),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
+                kbox20(),
                 const Text(
                   "From Assam with Love",
                   style: TextStyle(
@@ -537,47 +642,61 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.w300),
                 ),
                 kbox20(),
-                Container(
-                  height: 120.h,
-                  child: ListView.separated(
-                    itemCount: brand.length,
-                    separatorBuilder: (context, index) => kboxw10(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const ChickenProductView());
+                Obx(() {
+                  if (!homeController.assamProductsIsLoading.value) {
+                    return Container(
+                      height: 120.h,
+                      child: ListView.separated(
+                        itemCount: homeController.assamProducts.length,
+                        separatorBuilder: (context, index) => kboxw10(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          Product product = homeController.assamProducts[index];
+                          String? image = product.images!.isNotEmpty
+                              ? product.images?.first
+                              : null;
+                          String? name = product.name;
+                          return InkWell(
+                            onTap: () {
+                              Get.to(const ChickenProductView());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2, color: Color(0xff97CADB)),
+                                      shape: BoxShape.circle),
+                                  child: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundImage: NetworkImage(image ??
+                                        'https://thumbs.dreamstime.com/b/red-apple-fruit-half-green-leaf-isolated-white-ripe-background-apples-clipping-path-98166062.jpg'),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                                kbox10(),
+                                Text(
+                                  name ?? 'Unknown',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: AppColors.ktextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 2, color: Color(0xff97CADB)),
-                                  shape: BoxShape.circle),
-                              child: CircleAvatar(
-                                radius: 30.0,
-                                backgroundImage: AssetImage(brand[index]),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            kbox10(),
-                            Text(
-                              shopbycategorytext[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: AppColors.ktextColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
               ],
             ),
           ),

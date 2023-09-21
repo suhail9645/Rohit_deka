@@ -8,7 +8,6 @@ import 'package:rohit_multivender/utills/app_colors.dart';
 import 'package:rohit_multivender/utills/constant_box.dart';
 import 'package:rohit_multivender/utills/constant_button.dart';
 
-
 class LoginView extends StatelessWidget {
   LoginView({super.key});
   final TextEditingController numberController = TextEditingController();

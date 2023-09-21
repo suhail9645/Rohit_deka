@@ -38,6 +38,9 @@ class ProductService {
     } on DioException catch (e) {
       return Left(
           Failure(error: e.error.toString(), message: e.message.toString()));
+    } catch (e) {
+      return Left(
+          Failure(error: 'Something wrong', message: 'Please try again'));
     }
   }
 }

@@ -22,7 +22,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
   @override
   Widget build(BuildContext context) {
     AuthController authController = Get.put(AuthController());
-    print(authController.authModel?.user?.otp);
+   
 
     return Scaffold(
       body: SingleChildScrollView(

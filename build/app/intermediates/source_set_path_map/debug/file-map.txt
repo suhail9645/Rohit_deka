@@ -23,3 +23,4 @@ com.example.rohit_multivender.app-mergeDebugResources-21 C:\Users\user\Desktop\F
 com.example.rohit_multivender.app-merged_res-22 C:\Users\user\Desktop\FLUTTER\rohit_deka\build\app\intermediates\merged_res\debug
 com.example.rohit_multivender.app-packaged_res-23 C:\Users\user\Desktop\FLUTTER\rohit_deka\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
 com.example.rohit_multivender.app-packaged_res-24 C:\Users\user\Desktop\FLUTTER\rohit_deka\build\image_picker_android\intermediates\packaged_res\debug
+com.example.rohit_multivender.app-packaged_res-25 C:\Users\user\Desktop\FLUTTER\rohit_deka\build\shared_preferences_android\intermediates\packaged_res\debug
